@@ -1,0 +1,85 @@
+cmake_minimum_required(VERSION 3.4.1)
+
+#添加头文件路径（相对于本文件路径）
+include_directories(${CMAKE_SOURCE_DIR}/src/main/cpp/include)
+#设置FFmpeg库so文件路径
+set(ff_dir ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI})
+
+add_library(avcodec SHARED IMPORTED)
+set_target_properties(avcodec
+
+        PROPERTIES
+
+        IMPORTED_LOCATION
+
+        ${ff_dir}/libavcodec.so)
+
+add_library(avfilter SHARED IMPORTED)
+set_target_properties(avfilter
+
+        PROPERTIES
+
+        IMPORTED_LOCATION
+
+        ${ff_dir}/libavfilter.so)
+
+add_library(avformat SHARED IMPORTED)
+set_target_properties(avformat
+
+        PROPERTIES
+
+        IMPORTED_LOCATION
+
+        ${ff_dir}/libavformat.so)
+
+add_library(avutil SHARED IMPORTED)
+set_target_properties(avutil
+
+        PROPERTIES
+
+        IMPORTED_LOCATION
+
+        ${ff_dir}/libavutil.so)
+
+add_library(swresample SHARED IMPORTED)
+set_target_properties(swresample
+
+        PROPERTIES
+
+        IMPORTED_LOCATION
+
+        ${ff_dir}/libswresample.so)
+
+
+add_library(swscale SHARED IMPORTED)
+set_target_properties(swscale
+
+        PROPERTIES
+
+        IMPORTED_LOCATION
+
+        ${ff_dir}/libswscale.so)
+
+add_library(
+        native-lib
+
+        SHARED
+
+        src/main/cpp/native-lib.cpp)
+
+find_library( # Sets the name of the path variable.
+        log-lib
+
+        # Specifies the name of the NDK library that
+        # you want CMake to locate.
+        log)
+
+target_link_libraries( # Specifies the target library.
+        native-lib
+        avcodec
+        avfilter
+        avformat
+        avutil
+        swresample
+        swscale
+        ${log-lib})
