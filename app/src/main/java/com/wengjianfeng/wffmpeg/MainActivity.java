@@ -15,8 +15,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         TextView tvInfo = findViewById(R.id.tv_info);
         tvInfo.setText(stringFromJNI());
+//        Open("/sdcard/1552998953770.wav",this);
 
     }
 
     public native String stringFromJNI();
+
+//    public native boolean Open(String url,Object handle);
 }
