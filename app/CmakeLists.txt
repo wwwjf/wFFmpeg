@@ -60,6 +60,10 @@ set_target_properties(swscale
 
         ${ff_dir}/libswscale.so)
 
+#设置生成的so动态库最后输出的路径
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/libs/${ANDROID_ABI})
+
 add_library(
         native-lib
 
@@ -74,12 +78,20 @@ find_library( # Sets the name of the path variable.
         # you want CMake to locate.
         log)
 
+
 target_link_libraries( # Specifies the target library.
         native-lib
+
         avcodec
+
         avfilter
+
         avformat
+
         avutil
+
         swresample
+
         swscale
+
         ${log-lib})

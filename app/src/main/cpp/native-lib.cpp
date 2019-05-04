@@ -17,18 +17,19 @@ Java_com_wengjianfeng_wffmpeg_MainActivity_stringFromJNI(
         jobject /* this */) {
     std::string hello = "Hello from C++";
     hello += avcodec_configuration();
+    hello += avformat_configuration();
     //初始化解封装
-    av_register_all();
+    /*av_register_all();
     //打开文件
     AVFormatContext *ic = NULL;
     char path[] = "/sdcard/1552998953123.wav";
     int re = avformat_open_input(&ic,path,0,0);
     if (re){
-        LOGW("avformat 打开成功 %s",path);\
+        LOGW("avformat 打开成功 %s",path);
         avformat_close_input(&ic);
     } else{
         LOGW("avformat 打开失败 %s",av_err2str(re));
-    }
+    }*/
 
     return env->NewStringUTF(hello.c_str());
 }
